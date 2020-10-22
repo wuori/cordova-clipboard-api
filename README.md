@@ -73,6 +73,7 @@ fetch(url)
 	reader.readAsDataURL(blob) ;
 });
 ```
+---
 
 ### Paste()
 
@@ -97,6 +98,7 @@ window.cordova.plugins.clipboard.paste((res) => {
 	}
 });
 ```
+---
 
 ### clear()
 
