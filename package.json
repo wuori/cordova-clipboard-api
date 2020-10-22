@@ -1,6 +1,6 @@
 {
   "name": "cordova-clipboard-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Clipboard copy and paste plugin for Cordova/PhoneGap that supports text, images and urls for iOS, Android.",
   "cordova": {
     "id": "cordova-clipboard",
@@ -20,7 +20,8 @@
     "copy",
     "paste",
     "phonegap",
-    "ionic"
+    "ionic",
+    "ecosystem:cordova"
   ],
   "author": "Michael Wuori",
   "license": "MIT",
