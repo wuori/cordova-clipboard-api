@@ -1,6 +1,8 @@
 Cordova Clipboard API
 =========
 
+[![npm version](https://badge.fury.io/js/cordova-clipboard-api.svg)](https://badge.fury.io/js/cordova-clipboard-api)
+
 Clipboard management plugin for Cordova/PhoneGap that supports images, text and urls for iOS. Android support is limited to text content only.
 
 ## Installation
