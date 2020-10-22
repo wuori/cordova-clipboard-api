@@ -126,7 +126,7 @@ window.cordova.plugins.clipboard.clear();
 
 ## Acknowledgements
 
-This plugin began as a fork of [CordovaClipboar](https://github.com/ihadeed/cordova-clipboard) which was inspired by [ClipboardManagerPlugin](https://github.com/jacob/ClipboardManagerPlugin) (Android) and [ClipboardPlugin](https://github.com/phonegap/phonegap-plugins/tree/master/iPhone/ClipboardPlugin) (iOS).
+This plugin began as a fork of [CordovaClipboard](https://github.com/ihadeed/cordova-clipboard) which was inspired by [ClipboardManagerPlugin](https://github.com/jacob/ClipboardManagerPlugin) (Android) and [ClipboardPlugin](https://github.com/phonegap/phonegap-plugins/tree/master/iPhone/ClipboardPlugin) (iOS).
 
 This plugin adds support for urls and images (iOS only) as well as provides a more complete callback object with error handling.
 
