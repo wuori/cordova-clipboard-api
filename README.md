@@ -1,49 +1,138 @@
-Clipboard
+Cordova Clipboard API
 =========
 
-Clipboard management plugin for Cordova/PhoneGap that supports iOS, Android, and Windows Phone 8.
+Clipboard management plugin for Cordova/PhoneGap that supports images, text and urls for iOS. Android support is limited to text content only.
 
 ## Usage
 
 ```
-cordova plugin add cordova-clipboard
+cordova plugin add cordova-clipboard-api
 ```
 
-The plugin creates the object `cordova.plugins.clipboard` with the methods `copy(text, onSuccess, onError)`, `paste(onSuccess, onError)` and `clear(onSuccess, onError)`
+The plugin creates the object `cordova.plugins.clipboard` with the methods `copy(text, onSuccess, onError)`, `paste(onSuccess, onError)` and `clear(onSuccess, onError)`.
 
-Example:
+### Copy()
 
-	var text = "Hello World!";
+`copy(options, callback)`
 
-	cordova.plugins.clipboard.copy(text);
+The `options` object contains two properties: `type` and `data`.
 
-	cordova.plugins.clipboard.paste(function (text) { alert(text); });
+- *type* - One of "text", "url" or "image"
+- *data* - Data to be sent to clipboard
 
-	cordova.plugins.clipboard.clear();
+Callback will contain an object:
+```
+{
+	type: "ex: text", // type value submitted to plugin
+	data: "ex: Howdy Partner!", // data submitted to plugin
+	error: false // false if successful. Exception text if not.
+}
+```
+
+#### Copy Text (iOS/Android)
+```
+window.cordova.plugins.clipboard.copy({
+	type: "text", // default, so not needed for text
+	data: "Howdy Partner!"
+}, (res) => {
+	console.log(res);
+});
+```
+
+#### Copy URL (iOS only)
+```
+window.cordova.plugins.clipboard.copy({
+	type: "url",
+	data: "https://yesorno.io/"
+}, (res) => {
+	console.log(res.type);
+});
+```
+
+#### Copy Image (iOS only)
+
+*NOTE:* Only tested with remote URLs so far.
+
+```
+let imageUrl = "https://placedog.net/500";
+
+// get blob of image (example only, use whatever method you like!)
+fetch(url)
+.then((response) => {
+	return response.blob();
+}).then((blob) => {
+	let reader = new FileReader() ;
+	reader.onload = (res) => { 
+		window.cordova.plugins.clipboard.copy({
+			type: 'image',
+			data: res.target.result
+		}, (res) => {
+			console.log(res);
+		});
+	};
+	reader.readAsDataURL(blob) ;
+});
+```
+
+### Paste()
+
+`paste(callback)`
+
+Callback will contain an object:
+```
+{
+	type: "ex: text", // type of data coming from clipboard
+	data: "ex: Howdy Partner!", // data coming from clipboard
+}
+```
+
+*NOTE:* Pasted images in iOS will always be base64-encoded string.
+Example: `data:image/png;base64,iVBORw0KGgoAAAAN...`
+
+#### Paste Data from Clipboard
+```
+window.cordova.plugins.clipboard.paste((res) => {
+	if(res.type == "text"){
+		this.text = res.data;
+	}
+});
+```
+
+### clear()
+
+`clear()`
+
+#### Clear Data from Clipboard
+```
+window.cordova.plugins.clipboard.clear();
+```
 
 ## Notes
 
-### All platforms
+### Testing
 
-- The plugin only works with text content.
+- This plugin hasn't been tested on a ton of physical devices yet. Please file an issue should you find a bug!
 
-### Windows Phone
+### iOS
 
-- The Windows Phone platform doesn't allow applications to read the content of the clipboard. Using the `paste` method will return an error.
+- The minimum supported version of iOS is v7.0.
 
 ### Android
 
+- Android version only supports text content.
 - The minimum supported API Level is 11. Make sure that `minSdkVersion` is larger or equal to 11 in `AndroidManifest.xml`.
 
 ## Acknowledgements
 
-This plugin was inspired by [ClipboardManagerPlugin](https://github.com/jacob/ClipboardManagerPlugin) (Android) and [ClipboardPlugin](https://github.com/phonegap/phonegap-plugins/tree/master/iPhone/ClipboardPlugin) (iOS).
+This plugin began as a fork of [CordovaClipboar](https://github.com/ihadeed/cordova-clipboard) which was inspired by [ClipboardManagerPlugin](https://github.com/jacob/ClipboardManagerPlugin) (Android) and [ClipboardPlugin](https://github.com/phonegap/phonegap-plugins/tree/master/iPhone/ClipboardPlugin) (iOS).
+
+This plugin adds support for urls and images (iOS only) as well as provides a more complete callback object with error handling.
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Verso Solutions LLC
+Copyright (c) 2020 Michael Wuori
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

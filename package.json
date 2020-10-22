@@ -17,6 +17,8 @@
     "cordova",
     "plugin",
     "clipboard",
+    "copy",
+    "paste",
     "phonegap",
     "ionic"
   ],
