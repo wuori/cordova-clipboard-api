@@ -3,13 +3,15 @@ Cordova Clipboard API
 
 Clipboard management plugin for Cordova/PhoneGap that supports images, text and urls for iOS. Android support is limited to text content only.
 
-## Usage
+## Installation
 
 ```
 cordova plugin add cordova-clipboard-api
 ```
 
-The plugin creates the object `cordova.plugins.clipboard` with the methods `copy(text, onSuccess, onError)`, `paste(onSuccess, onError)` and `clear(onSuccess, onError)`.
+The plugin creates the object `cordova.plugins.clipboard` with the methods `copy(options, callback)`, `paste(callback)` and `clear()`.
+
+## Methods
 
 ### Copy()
 
